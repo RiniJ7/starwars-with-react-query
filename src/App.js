@@ -4,12 +4,14 @@ import People from "./components/People";
 import Planets from "./components/Planets";
 
 
+
 function App() {
 
   // the default display will be planets
   const [page, setPage] = useState('planets');
 
   return (
+    <>
     <div className="App">
         <h1>Star Wars Info</h1>
         {/* we are using a prop called setPage that is set to a setPage function */}
@@ -21,6 +23,8 @@ function App() {
 </div>
     </div>
     </div>
+   
+    </>
   );
 }
 
