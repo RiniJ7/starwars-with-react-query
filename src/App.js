@@ -13,10 +13,12 @@ function App() {
     <div className="App">
         <h1>Star Wars Info</h1>
         {/* we are using a prop called setPage that is set to a setPage function */}
+        <div>
         <Navbar setPage={setPage} />
     <div className="content">
 {/* conditional rendering using ternary operator */}
 { page === 'planets' ? <Planets /> : <People />}
+</div>
     </div>
     </div>
   );
