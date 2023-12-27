@@ -1,13 +1,23 @@
-import React from "react";
+import React, {useState} from "react";
+import Navbar from "./components/Navbar";
+import People from "./components/People";
+import Planets from "./components/Planets";
+
 
 function App() {
+
+  // the default display will be planets
+  const [page, setPage] = useState('planets');
+
   return (
-    <div >
-      
-        <h1>
-          Learn React
-        </h1>
-    
+    <div className="App">
+        <h1>Star Wars Info</h1>
+        {/* we are using a prop called setPage that is set to a setPage function */}
+        <Navbar setPage={setPage} />
+    <div className="content">
+{/* conditional rendering using ternary operator */}
+{ page === 'planets' ? <Planets /> : <People />}
+    </div>
     </div>
   );
 }
