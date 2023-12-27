@@ -1,3 +1,58 @@
+
+import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import Person from './Person';
+
+
+async function fetchPeople() {
+  try 
+  {
+  const response = await fetch('https://swapi.dev/api/people/');
+  return response.json();
+  }
+  catch (error) {
+    console.log('Error:', error);
+  }
+  }
+ 
+
+
+
+const People = () => {
+// fetching api response using async await function
+const { data, status } = useQuery ({
+  queryKey: ['people'],
+  queryFn: fetchPeople,
+});
+  console.log(data);
+
+
+
+
+
+  return (
+    <div>
+      <h2>People</h2>
+      {status === 'error' && (
+        <div>Error Fetching data</div>
+      )}
+      {status === 'loading' && (
+        <div>Loading.....</div>
+      )}
+      {status === 'success' && (
+        <div>
+          { data.results.map((person)=> <Person key={person.name} person ={person} />)}
+        </div>
+      )}
+
+    </div>
+  )
+};
+
+export default People;
+
+
+
 // Fetch Data using Async/Await:
 // Create a function that uses async/await to fetch data from the API endpoint.
 // Use the fetch function to make the API call.
@@ -14,14 +69,3 @@
 // The final component can then easily react to loading, error, or success states.
 
 //Use functions as props to pass information down to the child component 'Person'
-
-import React, { StrictMode } from 'react'
-
-
-const People = () => {
-  return (
-    <div>People</div>
-  )
-}
-
-export default People;
