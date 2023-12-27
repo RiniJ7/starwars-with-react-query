@@ -17,6 +17,12 @@ const Planets = () => {
   const { data, status } = useQuery({
     queryKey: ['planets'],
     queryFn: fetchPlanets,
+    //can manually update the fetched data moves from 'fresh' to 'stale'
+    // staleTime: 2000,
+    //time in ms till data will be cached
+    // cacheTime: 10,
+    //on success status, a function can be triggered
+    // onSuccess: () => console.log ('data fetched with no problem')
   });
 console.log(data);
   
