@@ -2,15 +2,17 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Planet from './Planet';
 
-const fetchPlanets = async () => {
-  const res = await fetch("https://swapi.dev/api/planets/");
-  return res.json();
-};
+
 
 const Planets = () => {
   //useQuery will manage the fetching under the hood . 
   //it will pass the data and refetch the data whenever required to do so
   //status is the status of the query . it can be 'success' 'pending' or 'error'
+  const fetchPlanets = async () => {
+    const res = await fetch("https://swapi.dev/api/planets/");
+    return res.json();
+  };
+
   
   const { data, status } = useQuery({
     queryKey: ['planets'],
