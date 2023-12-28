@@ -1,13 +1,14 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Person from './Person';
 
 
-async function fetchPeople() {
+async function fetchPeople({ queryKey }) {
+  const [key,page] = queryKey;
   try 
   {
-  const response = await fetch('https://swapi.dev/api/people/');
+  const response = await fetch(`https://swapi.dev/api/people/?page=${page}`);
   return response.json();
   }
   catch (error) {
@@ -19,20 +20,33 @@ async function fetchPeople() {
 
 
 const People = () => {
+  const [page, setPage] = useState(1);
 // fetching api response using async await function
-const { data, status } = useQuery ({
-  queryKey: ['people'],
+const { data, status } = useQuery({
+  queryKey: ['people', page],
   queryFn: fetchPeople,
 });
+
   console.log(data);
-
-
 
 
 
   return (
     <div>
       <h2>People</h2>
+
+
+<button onClick={() => setPage(1)}>Page1 </button>    
+<button onClick={() => setPage(2)}>Page2 </button>    
+<button onClick={() => setPage(3)}>Page3 </button>    
+<button onClick={() => setPage(4)}>Page4 </button>    
+<button onClick={() => setPage(5)}>Page5 </button>    
+<button onClick={() => setPage(6)}>Page6 </button>    
+<button onClick={() => setPage(7)}>Page7 </button>    
+<button onClick={() => setPage(8)}>Page8 </button>    
+<button onClick={() => setPage(9)}>Page9 </button>    
+
+
       {status === 'error' && (
         <div>Error Fetching data</div>
       )}
@@ -41,7 +55,7 @@ const { data, status } = useQuery ({
       )}
       {status === 'success' && (
         <div>
-          { data.results.map((person)=> <Person key={person.name} person ={person} />)}
+          { data.results.map((person)=> (<Person key={person.name} person = { person } />))}
         </div>
       )}
 
